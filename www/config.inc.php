@@ -25,7 +25,7 @@
 	if(!isset($OHS)){
 	session_set_cookie_params(60*60*24*365);
 	session_start();
-	if(!isset($_SESSION['whatauth'])||!isset($_SESSION['username'])){
+	if(!isset($_SESSION['pthauth'])||!isset($_SESSION['username'])){
 		if(!isset($_POST['pass'])||$_POST['pass']!="$site_pw"){
 ?>
 	<html>
@@ -56,7 +56,7 @@
 			</style>
 		</head>
 		<body>
-			<div class="head">Sherlock (what.cd)</div>
+			<div class="head">Sherlock (passtheheadphones.me)</div>
 			<?php
 			if(isset($_POST['pass'])) $_GET['err']=2;
 			if(isset($_GET['err'])){
@@ -89,7 +89,7 @@
 		exit();
 		}else{
 			if(checkPresence($_POST['username'])){
-				$_SESSION['whatauth']=1;
+				$_SESSION['pthauth']=1;
 				$_SESSION['username']=$_POST['username'];
 				header("Location: index.php");
 				exit();
@@ -101,7 +101,7 @@
 		}
 	}
 	}
-	
+
 	function checkPresence($username){
 		global $sqlserver, $sqluser, $sqlpw, $sqldb;
 		$sqlconnection=mysql_connect($sqlserver,$sqluser,$sqlpw);
@@ -127,8 +127,8 @@
 		$newid = mysql_insert_id();
                 return true;
         }
-	
-	
+
+
 	function getData($information,$duration="day"){
 		global $sqlserver, $sqluser, $sqlpw, $sqldb;
 		switch($duration){
@@ -200,7 +200,7 @@
 						if(strstr($thisri,"Type")) continue;
 						$thisrow[$thisri]=floatval($thisrv);
 				}
-				
+
 			}
 			$data[$thisrow["date"]]=$thisrow;
 		}
@@ -253,7 +253,7 @@
 		}
 		return $data;
 	}
-	
+
 	function currentStats($username){
 		global $sqlserver, $sqluser, $sqlpw, $sqldb;
 		$data=array();
@@ -280,7 +280,7 @@
 		}
 		return $data;
 	}
-	
+
 	function topTen($information,$duration){
 			global $sqlserver, $sqluser, $sqlpw, $sqldb;
 			$topten=array();
@@ -344,7 +344,7 @@
 			elseif	($downloadedType == 'TB') { $dBuffer = $downloaded * 1048576;	    }
 			elseif	($downloadedType == 'PB') { $dBuffer = $downloaded * 1073741824;    }
 			elseif	($downloadedType == 'EB') { $dBuffer = $downloaded * 1099511627776; }
-			
+
 			if	($uploadedType == 'b')  { $buffer = $uploaded / 8388608;       }
 			elseif	($uploadedType == 'B')	{ $buffer = $uploaded / 1048576;       }
 			elseif	($uploadedType == 'KB')	{ $buffer = $uploaded / 1024; 	       }
@@ -353,7 +353,7 @@
 			elseif	($uploadedType == 'TB') { $buffer = $uploaded * 1048576;       }
 			elseif	($uploadedType == 'PB') { $buffer = $uploaded * 1073741824;    }
 			elseif	($uploadedType == 'EB') { $buffer = $uploaded * 1099511627776; }
-			
+
 			#Convert buffer to the appropriate power
 			if($dBuffer==0) $dBuffer=1;
 			$ratio = $buffer / $dBuffer;

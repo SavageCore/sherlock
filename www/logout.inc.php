@@ -2,7 +2,7 @@
 //	include_once "config.inc.php";
 	session_start();
 	if(isset($_GET['logout'])){
-		unset($_SESSION['whatauth']);
+		unset($_SESSION['pthauth']);
 		unset($_SESSION['username']);
 		header("Location: .");
 		exit();
@@ -48,7 +48,7 @@
 			</style>
 		</head>
 		<body>
-			<div class="head">Sherlock (what.cd)</div>
+			<div class="head">Sherlock (passtheheadphones.me)</div>
 			<?php
 			if(isset($_GET['err'])){
 			$err=array();
@@ -70,7 +70,7 @@
 				</tbody></table>
 			</form>
 		</body>
-	</html>			
+	</html>
 			<?php
 			exit();
 		}

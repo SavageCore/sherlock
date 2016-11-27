@@ -1,21 +1,21 @@
 <?php
 	include "config.inc.php";
 	include "prefs.inc.php";
-	
+
 	$prefs=getPrefs();
-	
+
 	if(isset($_GET['preferences_changed'])){
     savePref("tz",array($_GET['tz'],$_GET['dst']));
     savePref("gs",array($_GET['gs']));
     // savePref("graphPrefs",$_GET['graphPrefs']);
-    
+
     // Save settings to session to use in javascript
     $_SESSION['tz'] = $_GET['tz'];
     $_SESSION['dst'] = $_GET['dst'];
     $_SESSION['gs'] = $_GET['gs'];
     $_SESSION['graphPrefs[0]'] = $_GET['graphPrefs[0]'];
     $_SESSION['graphPrefs[1]'] = $_GET['graphPrefs[1]'];
-    
+
     if(count($prefs['tz'])){
       $tz=timezone_name_from_abbr("", intval($prefs['tz'][0])*60*60, $prefs['tz'][1]);
     } else {
@@ -26,11 +26,11 @@
     } else {
       $gs="week";
     }
-    
+
     header("Location: index.php");
     exit();
 	}
-	
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -56,20 +56,20 @@
       <h2 id="logo"><a href="index.php">Sherlock - The IRC Search Bot &amp; Ratio Monitoring Service</a></h2>
       <div id="logged_in"><p><a href="index.php?logout" class="logout_link">Logout</a></p></div>
     </div>
-  
+
     <div id="navigation_bar">
       <ul id="navigation">
-        <li id="user_navitem"><a href="index.php">What.cd statistics for <?php echo $_SESSION['username']; ?></a></li>
+        <li id="user_navitem"><a href="index.php">PassTheHeadphones statistics for <?php echo $_SESSION['username']; ?></a></li>
         <li id="topten_navitem"><a href="topten.php">Top 10</a></li>
         <li id="preferences_navitem"><a href="prefs.php">Preferences</a></li>
         <li id="graphmanager_navitem"><a href="graphManager.php">Graph Manager</a></li>
       </ul>
       <form id="search" action="index.php" method="get">
         <input type="text" name="su" value="Username" id="su" />
-        <input type="submit" value="View User Statistics" id="search_submit" />      
+        <input type="submit" value="View User Statistics" id="search_submit" />
       </form>
     </div>
-    
+
     <div id="content">
       <div id="page_header">
         <h1>Preferences</h1>

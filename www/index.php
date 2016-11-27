@@ -22,25 +22,25 @@
       <h2 id="logo"><a href="index.php">Sherlock - The IRC Search Bot &amp; Ratio Monitoring Service</a></h2>
       <div id="logged_in"><p><a href="index.php?logout" class="logout_link">Logout</a></p></div>
     </div>
-  
+
     <div id="navigation_bar">
       <ul id="navigation">
-        <li id="user_navitem"><a href="index.php">What.cd statistics for <?php echo $_SESSION['username']; ?></a></li>
+        <li id="user_navitem"><a href="index.php">PassTheHeadphones statistics for <?php echo $_SESSION['username']; ?></a></li>
         <li id="topten_navitem"><a href="topten.php">Top 10</a></li>
         <li id="preferences_navitem"><a href="prefs.php">Preferences</a></li>
         <li id="graphmanager_navitem"><a href="graphManager.php">Graph Manager</a></li>
       </ul>
       <form id="search" action="index.php" method="get">
         <input type="text" name="su" value="Username" id="su" />
-        <input type="submit" value="View User Statistics" id="search_submit" />      
+        <input type="submit" value="View User Statistics" id="search_submit" />
       </form>
     </div>
-    
+
     <div id="content">
       <div id="page_header">
-        <h1>What.cd statistics for <span><?php echo $_SESSION['username']; ?></span></h1>
+        <h1>PassTheHeadphones statistics for <span><?php echo $_SESSION['username']; ?></span></h1>
       </div>
-      
+
       <div id="statistics_summary">
         <div class="section_head clearfix">
           <div class="primary">
@@ -62,19 +62,19 @@
             $week = timeSpan($_SESSION['username'],"week");
             $month = timeSpan($_SESSION['username'],"month");
             $alltime = currentStats($_SESSION['username']);
-            
+
             // Buffer variables
             $daybuffer = $day['buffer'];
             $weekbuffer = $week['buffer'];
             $monthbuffer = $month['buffer'];
             $alltimebuffer = $alltime['buffer'];
-            
+
             // Ratio variables
             $dayratio = $day['ratio'];
             $weekratio = $week['ratio'];
             $monthratio = $month['ratio'];
             $alltimeratio = $alltime['ratio'];
-            
+
             // Check class for past 24 hour buffer
             $daybufferclass = "";
             if($daybuffer>0) {
@@ -85,7 +85,7 @@
 
             // get threshold used for display rows
             $threshold = ($day['uploaded'] / 24) * 1.3;
-            
+
             // Check class for past week buffer
             $weekbufferclass = "";
             if($weekbuffer>0) {
@@ -93,7 +93,7 @@
             } elseif($weekbuffer<0) {
               $weekbufferclass = "negative";
             }
-            
+
             // Check class for past month buffer
             $monthbufferclass = "";
             if($monthbuffer>0) {
@@ -101,7 +101,7 @@
             } elseif($monthbuffer<0) {
               $monthbufferclass = "negative";
             }
-            
+
             // Check class for past 24 hour ratio
             $dayratioclass = "";
             if($dayratio>0) {
@@ -109,7 +109,7 @@
             } elseif($dayratio<0) {
               $dayratioclass = "negative";
             }
-            
+
             // Check class for past week ratio
             $weekratioclass = "";
             if($weekratio>0) {
@@ -117,7 +117,7 @@
             } elseif($weekratio<0) {
               $weekratioclass = "negative";
             }
-            
+
             // Check class for past month ratio
             $monthratioclass = "";
             if($monthratio>0) {
@@ -152,7 +152,7 @@
           </ul>
         </div>
       </div>
-      
+
       <div id="hourly_statistics" class="page_section">
         <div class="section_head clearfix">
           <div class="primary"><h3>Hourly Statistics</h3></div>
@@ -191,7 +191,7 @@
               		$buffer=$d["buffer"];
               		$diffbuff=$buffer-$lastbuff;
               		$lastbuff=$buffer;
-              		
+
               		$bufferclass = "";
               		$overrange = false;
               		if(abs($diffbuff) > $threshold){ $overrange = true; }
@@ -202,7 +202,7 @@
               		} else {
               		  $bufferclass = "negative";
               		}
-                  
+
               		$fbuff="<span title=\"".$diffbuff." B\">".getByteStr($diffbuff)."</span> <span class=\"all-time\" title=\"".$buffer." B\">(".getByteStr($buffer).")</span>";
               		$ratio=number_format($d["ratio"],4);
               		$diffratio=number_format($ratio-$lastratio,4);
@@ -221,7 +221,7 @@
           </table>
         </div>
       </div>
-      
+
       <div id="graphs" class="page_section">
         <div class="section_head clearfix"><div class="primary"><h3>Graphs</h3></div></div>
         <div class="section_body">
@@ -237,7 +237,7 @@
             </div>
             <div class="graph_body" id="upload_download_per_hour" style="height: 180px; width: 940px;"></div>
           </div>
-          
+
           <div class="graph">
             <div class="graph_head clearfix">
               <div class="primary"><h4>Upload and download (total)</h4></div>
@@ -250,7 +250,7 @@
             </div>
             <div class="graph_body" id="upload_download_total" style="height: 180px; width: 940px;"></div>
           </div>
-          
+
           <div class="graph">
             <div class="graph_head clearfix">
               <div class="primary"><h4>Buffer</h4></div>
@@ -262,7 +262,7 @@
             </div>
             <div class="graph_body" id="buffer" style="height: 180px; width: 940px;"></div>
           </div>
-          
+
           <div class="graph">
             <div class="graph_head clearfix">
               <div class="primary"><h4>Ratio</h4></div>
@@ -274,9 +274,9 @@
             </div>
             <div class="graph_body" id="ratio" style="height: 180px; width: 940px;"></div>
           </div>
-        </div>        
+        </div>
       </div>
-      
+
       <?php if(count($prefs['cGraphs'])){ ?>
       <div id="custom_graphs" class="page_section">
         <div class="section_head clearfix"><div class="primary"><h3>Custom Graphs</h3></div></div>
@@ -355,7 +355,7 @@
           foreach(str_split($c['d']) as $d){
           $title.=", ".$indexconv[$d];
           }
-          ?> 
+          ?>
           <div class="graph">
             <div class="graph_head clearfix">
               <div class="primary"><h4>Custom Graph #<?php echo $i2; ?></h4></div>
@@ -387,9 +387,9 @@
             </script>
           </div>
           <?php } ?>
-        </div>        
+        </div>
       </div>
-      <?php } ?>      
+      <?php } ?>
     </div>
   </div>
   <script type="text/javascript" charset="utf-8">
@@ -428,7 +428,7 @@
         gridLineColor: '#ccc',
       }
     );
-    
+
     // Upload and download total
     upload_download_total = new Dygraph(
       document.getElementById("upload_download_total"),
@@ -460,7 +460,7 @@
         drawPoints: true
       }
     );
-    
+
     // Buffer
     buffer = new Dygraph(
       document.getElementById("buffer"),
@@ -487,7 +487,7 @@
         drawPoints: true
       }
     );
-    
+
     // Ratio
     ratio = new Dygraph(
       document.getElementById("ratio"),

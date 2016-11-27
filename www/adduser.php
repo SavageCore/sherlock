@@ -2,7 +2,7 @@
 	error_reporting(0);
 	require_once "sekrit.php";
 
-        function checkPresence($username){ 
+        function checkPresence($username){
 		global $sqlserver, $sqluser, $sqlpw, $sqldb;
                 $sqlconnection=mysql_connect($sqlserver,$sqluser,$sqlpw);
                 mysql_select_db($sqldb,$sqlconnection);
@@ -38,13 +38,11 @@
 	} else {
 ?>
 	<form action="" method="get">
-		What.CD username: <input type="text" name="username" /> <br />
-		What.CD userid: <input type="text" name="userid" /> <br />
+		PassTheHeadphones username: <input type="text" name="username" /> <br />
+		PassTheHeadphones userid: <input type="text" name="userid" /> <br />
 		<input type="submit" value="Add me!" />
 	</form>
 
 <?php
 	}
 ?>
-
-

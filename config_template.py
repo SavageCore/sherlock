@@ -5,4 +5,3 @@ db = {
     'password': 'blablabla',
 }
 api_path = 'something.php'
-
